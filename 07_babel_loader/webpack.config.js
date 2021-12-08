@@ -107,6 +107,22 @@ module.exports = {
           parse: json5.parse,
         },
       },
+      {
+        test: /\.js$/,
+        exclude: /(node_modules|bower_components)/,
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: ["@babel/preset-env"],
+            plugins: ["@babel/plugin-transform-runtime"],
+            exclude: [
+              // \\ for Windows, \/ for Mac OS and Linux
+              /node_modules[\\\/]core-js/,
+              /node_modules[\\\/]webpack[\\\/]buildin/,
+            ],
+          },
+        },
+      },
     ],
   },
   optimization: {
