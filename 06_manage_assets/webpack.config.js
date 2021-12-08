@@ -1,6 +1,14 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+
+const toml = require("toml");
+const yaml = require("yaml");
+const json5 = require("json5");
+
 module.exports = {
   entry: "./src/index.js", // 入口文件
   output: {
@@ -18,6 +26,9 @@ module.exports = {
       template: "./index.html", // 主文件路径
       filename: "app.html", // 主文件名
       inject: "body", // script 位置
+    }),
+    new MiniCssExtractPlugin({
+      filename: "styles/[contenthash].css", // 主文件名
     }),
   ],
   devServer: {
@@ -53,6 +64,58 @@ module.exports = {
           },
         },
       },
+      // loader
+      // {
+      //   test: /\.(css|less)$/,
+      //   use: ["style-loader", "css-loader", "less-loader"],
+      // },
+      {
+        test: /\.(css|less)$/,
+        use: [MiniCssExtractPlugin.loader, "css-loader", "less-loader"],
+      },
+
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/,
+        type: "asset/resource",
+      },
+      {
+        test: /\.(csv|tsv)$/,
+        use: "csv-loader",
+      },
+      {
+        test: /\.xml$/,
+        use: "xml-loader",
+      },
+      {
+        test: /\.toml$/,
+        type: "json",
+        parser: {
+          parse: toml.parse,
+        },
+      },
+      {
+        test: /\.yaml$/,
+        type: "json",
+        parser: {
+          parse: yaml.parse,
+        },
+      },
+      {
+        test: /\.json5$/,
+        type: "json",
+        parser: {
+          parse: json5.parse,
+        },
+      },
     ],
+  },
+  optimization: {
+    // 优化配置
+    minimizer: [
+      // 在 webpack@5 中，你可以使用 `...` 语法来扩展现有的 minimizer（即 `terser-webpack-plugin`），将下一行取消注释
+      // `...`,
+      new CssMinimizerPlugin(),
+    ],
+    minimize: true, // 在开发环境下启用 CSS 优化，请将 optimization.minimize 设置为 true:
   },
 };
