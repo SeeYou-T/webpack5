@@ -1,4 +1,8 @@
 {
+  "scripts": {
+    "start": "npx webpack serve -c ./config/webpack.config.dev.js",
+    "build": "npx webpack  -c ./config/webpack.config.pro.js"
+  },
   "dependencies": {
     "lodash": "^4.17.21",
     "webpack": "^5.65.0",
@@ -20,6 +24,7 @@
     "less-loader": "^10.2.0",
     "mini-css-extract-plugin": "^2.4.5",
     "style-loader": "^3.3.1",
+    "terser-webpack-plugin": "^5.2.5",
     "toml": "^3.0.0",
     "xml-loader": "^1.2.1",
     "yaml": "^1.10.2"
