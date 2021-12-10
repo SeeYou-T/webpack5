@@ -148,11 +148,12 @@ module.exports = (env) => {
       minimizer: [
         // 在 webpack@5 中，你可以使用 `...` 语法来扩展现有的 minimizer（即 `terser-webpack-plugin`），将下一行取消注释
         // `...`,
-        new CssMinimizerPlugin(),
-        new TerserPlugin(),
+        new CssMinimizerPlugin(), // 压缩css
+        new TerserPlugin(), // 压缩js
       ],
       // minimize: true, // 在开发环境下启用 CSS 优化，请将 optimization.minimize 设置为 true:
       splitChunks: {
+        // 抽离公共依赖
         // chunks: "all",
         cacheGroups: {
           vendor: {
