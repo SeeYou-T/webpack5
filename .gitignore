@@ -1,4 +1,1 @@
-/node_modules
-10_multiple_env/node_modules
-11_dev_config/01_source-map/node_modules
-11_dev_config/02_devserver/node_modules
+**/node_modules

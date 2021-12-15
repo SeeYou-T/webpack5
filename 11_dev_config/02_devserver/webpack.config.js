@@ -8,9 +8,11 @@ module.exports = {
     static: path.resolve(__dirname, "./dist"),
     compress: true, // 在服务器端进行压缩，减少传输大小
     port: 3000,
+    host: "0.0.0.0",
     headers: {
       "x-Access-Token": "12345",
     },
+    output: { publicPath: "/" },
     proxy: {
       "/api": "http://localhost:9000",
     },
