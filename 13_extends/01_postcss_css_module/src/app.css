@@ -1,0 +1,7 @@
+body {
+  background-color: red;
+  display: flex;
+}
+body .box {
+  background-color: green;
+}

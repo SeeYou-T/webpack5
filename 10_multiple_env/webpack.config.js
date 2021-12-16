@@ -1,8 +1,8 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-// 编译css
+// 本插件会将 CSS 提取到单独的文件中，为每个包含 CSS 的 JS 文件创建一个 CSS 文件，并且支持 CSS 和 SourceMaps 的按需加载。
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-// 压缩css
+// 优化和压缩 CSS
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 // 压缩js
 const TerserPlugin = require("terser-webpack-plugin");
