@@ -4,7 +4,8 @@
     "build": "npx webpack  -c ./config/webpack.config.pro.js"
   },
   "dependencies": {
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "test-myitem": "^1.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.16.0",
