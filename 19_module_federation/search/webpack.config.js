@@ -1,9 +1,8 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { ModuleFederationPlugin } = require("webpack").container;
-
 module.exports = {
   mode: "production",
-  entry: "./src/index.js",
+  entry: "./src/index.jsx",
   plugins: [
     new HtmlWebpackPlugin({
       filename: "index.html",
@@ -11,13 +10,14 @@ module.exports = {
       inject: "body",
     }),
     new ModuleFederationPlugin({
-      name: "nav", // 标记模块名称
-      filename: "remoteEntry.js", // 远端访问路径
-      remotes: {}, // 引用其他暴露的组件
-      exposes: {
-        // 暴露出去的组件
-        "./Header": "./src/header.js",
+      name: "search",
+      filename: "remoteEntry.js",
+      remotes: {
+        nav: "nav@http://localhost:3003/remoteEntry.js",
+        con: "con@http://localhost:3001/remoteEntry.js",
       },
+
+      exposes: {},
       shared: {},
     }),
   ],
@@ -35,6 +35,6 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: [".js", ".jsx"],
+    extensions: [".jsx", ".js"],
   },
 };

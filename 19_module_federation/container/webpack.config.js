@@ -11,12 +11,13 @@ module.exports = {
       inject: "body",
     }),
     new ModuleFederationPlugin({
-      name: "nav", // 标记模块名称
-      filename: "remoteEntry.js", // 远端访问路径
-      remotes: {}, // 引用其他暴露的组件
+      name: "con",
+      filename: "remoteEntry.js",
+      remotes: {
+        nav: "nav@http://localhost:3003/remoteEntry.js", // nav配置的名字@路径
+      },
       exposes: {
-        // 暴露出去的组件
-        "./Header": "./src/header.js",
+        "./test": "./src/container.js",
       },
       shared: {},
     }),
@@ -24,7 +25,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.(jsx|js)$/,
         use: {
           loader: "babel-loader",
           options: {
@@ -35,6 +36,6 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: [".js", ".jsx"],
+    extensions: [".jsx", ".js"],
   },
 };
